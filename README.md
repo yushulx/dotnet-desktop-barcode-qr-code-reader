@@ -25,7 +25,7 @@ Set the license:
 DBR_InitLicense(hBarcode, "LICENSE-KEY");
 ```
 
-Download [Dynamsoft Barcode Reader 7.2.2](https://www.dynamsoft.com/Downloads/Dynamic-Barcode-Reader-Download.aspx).
+Download [Dynamsoft Barcode Reader 7.2.2](https://www.dynamsoft.com/Downloads/Dynamic-Barcode-Reader-Download.aspx). Alternatively, you can download [DynamsoftBarcodeReader.dll](https://github.com/yushulx/net-barcode-reader/releases/download/v1.0/DynamsoftBarcodeReader.dll) directly from GitHub.
 
 Copy `DynamsoftBarcodeReaderx64.dll` to `NetCoreBarcode` folder and rename it to `DynamsoftBarcodeReader.dll`.
 
