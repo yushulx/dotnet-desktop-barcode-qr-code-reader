@@ -42,23 +42,32 @@ namespace NetFrameworkBarcode
             /**NV21 */
             IPF_NV21,
 
-            /**16bit */
+            /**16bit with RGB channel order stored in memory from high to low address*/
             IPF_RGB_565,
 
-            /**16bit */
+            /**16bit with RGB channel order stored in memory from high to low address*/
             IPF_RGB_555,
 
-            /**24bit */
+            /**24bit with RGB channel order stored in memory from high to low address*/
             IPF_RGB_888,
 
-            /**32bit */
+            /**32bit with ARGB channel order stored in memory from high to low address*/
             IPF_ARGB_8888,
 
-            /**48bit */
+            /**48bit with RGB channel order stored in memory from high to low address*/
             IPF_RGB_161616,
 
-            /**64bit */
-            IPF_ARGB_16161616
+            /**64bit with ARGB channel order stored in memory from high to low address*/
+            IPF_ARGB_16161616,
+
+            /**32bit with ABGR channel order stored in memory from high to low address*/
+            IPF_ABGR_8888,
+
+            /**64bit with ABGR channel order stored in memory from high to low address*/
+            IPF_ABGR_16161616,
+
+            /**24bit with BGR channel order stored in memory from high to low address*/
+            IPF_BGR_888
         }
 
         public enum BarcodeFormat_2
@@ -72,17 +81,14 @@ namespace NetFrameworkBarcode
 
         public enum BarcodeFormat
         {
-            /**All supported formats */
-            BF_ALL = -32505857,
+            /**All supported formats in BarcodeFormat group 1*/
+            BF_ALL = -29360129,
 
-            /**Combined value of BF_CODABAR, BF_CODE_128, BF_CODE_39, BF_CODE_39_Extended, BF_CODE_93, BF_EAN_13, BF_EAN_8, INDUSTRIAL_25, BF_ITF, BF_UPC_A, BF_UPC_E; */
-            BF_ONED = 0x000007FF,
+            /**Combined value of BF_CODABAR, BF_CODE_128, BF_CODE_39, BF_CODE_39_Extended, BF_CODE_93, BF_EAN_13, BF_EAN_8, INDUSTRIAL_25, BF_ITF, BF_UPC_A, BF_UPC_E, BF_MSI_CODE;  */
+            BF_ONED = 0x003007FF,
 
             /**Combined value of BF_GS1_DATABAR_OMNIDIRECTIONAL, BF_GS1_DATABAR_TRUNCATED, BF_GS1_DATABAR_STACKED, BF_GS1_DATABAR_STACKED_OMNIDIRECTIONAL, BF_GS1_DATABAR_EXPANDED, BF_GS1_DATABAR_EXPANDED_STACKED, BF_GS1_DATABAR_LIMITED*/
             BF_GS1_DATABAR = 0x0003F800,
-
-            /**Combined value of BF_USPSINTELLIGENTMAIL, BF_POSTNET, BF_PLANET, BF_AUSTRALIANPOST, BF_UKROYALMAIL. Not supported yet. */
-            BF_POSTALCODE = 0x01F00000,
 
             /**Code 39 */
             BF_CODE_39 = 0x1,
@@ -96,7 +102,7 @@ namespace NetFrameworkBarcode
             /**Codabar */
             BF_CODABAR = 0x8,
 
-            /**ITF */
+            /**Interleaved 2 of 5 */
             BF_ITF = 0x10,
 
             /**EAN-13 */
@@ -141,21 +147,6 @@ namespace NetFrameworkBarcode
             /**Patch code. */
             BF_PATCHCODE = 0x00040000,
 
-            /**USPS Intelligent Mail. Not supported yet. */
-            BF_USPSINTELLIGENTMAIL = 0x00100000,
-
-            /**Postnet. Not supported yet. */
-            BF_POSTNET = 0x00200000,
-
-            /**Planet. Not supported yet. */
-            BF_PLANET = 0x00400000,
-
-            /**Australian Post. Not supported yet. */
-            BF_AUSTRALIANPOST = 0x00800000,
-
-            /**UK Royal Mail. Not supported yet. */
-            BF_UKROYALMAIL = 0x01000000,
-
             /**PDF417 */
             BF_PDF417 = 0x02000000,
 
@@ -177,8 +168,13 @@ namespace NetFrameworkBarcode
             /**Micro PDF417*/
             BF_MICRO_PDF417 = 0x00080000,
 
-            /**GS1 Composite Code*/
             BF_GS1_COMPOSITE = -2147483648,
+
+            /**MSI Code*/
+            BF_MSI_CODE = 0x100000,
+
+            /*Code 11*/
+            BF_CODE_11 = 0x200000,
 
             /**No barcode format in BarcodeFormat group 1*/
             BF_NULL = 0x00

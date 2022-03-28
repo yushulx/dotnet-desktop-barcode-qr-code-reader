@@ -1,37 +1,40 @@
-# .NET Barcode Reader
+# Desktop .NET Barcode and QR Code Reader
+The samples demonstrate how to use [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/sdk-desktop-server/) to create Desktop barcode and QR code reader applications based on **.NET Framework** and **.NET Core**.
 
-The source code demonstrates how to create GUI barcode reader apps on **.NET Framework** and **.NET Core**.
+## SDK Version
+[v9.0](https://www.dynamsoft.com/barcode-reader/downloads//#desktop)
 
-## License Requirement
-Register a new Dynamsoft account to get a valid [trial license](https://www.dynamsoft.com/CustomerPortal/Portal/Triallicense.aspx).
+## License Activation
+Click [here](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr) to get a valid license key.
 
-## .NET Framework Barcode Reader
-Set the license:
+### Usage
 
-```C#
-// BarcodeReaderManager.cs
-mBarcodeReader = new BarcodeReader("LICENSE-KEY");
-```
+### .NET Framework
+1. Import the project into **Visual Studio**.
+2. Install Dynamsoft Barcode Reader SDK via **Nuget**.
+3. Set the license key in `BarcodeReaderManager.cs`:
 
-Run the app in **Visual Studio 2017**:
+    ```C#
+    string errorMsg;
+    BarcodeReader.InitLicense("LICENSE-KEY", out errorMsg);
+    ```
+4. Run the application:
 
-![.net framework barcode reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-framework-barcode-reader.png)
+    ![.net framework barcode and QR code reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-framework-barcode-reader.png)
 
-## .NET Core Barcode Reader
-Set the license:
+## .NET Core
+1. Import the project into **Visual Studio** or **Visual Studio Code**.
+2. Download C++ SDK, and copy DLL files to the root of the project. For Windows, rename `DynamsoftBarcodeReaderx64.dll` to `DynamsoftBarcodeReader.dll`.
+3. Set the license in `BarcodeReaderManager.cs`:
 
-```C#
-// BarcodeReaderManager.cs
-DBR_InitLicense(hBarcode, "LICENSE-KEY");
-```
+    ```C#
+    string errorMsg = "";
+    DBR_InitLicense("LICENSE-KEY", out errorMsg, 512);
+    ```
 
-Download [Dynamsoft Barcode Reader 7.2.2](https://www.dynamsoft.com/Downloads/Dynamic-Barcode-Reader-Download.aspx). Alternatively, you can download [DynamsoftBarcodeReader.dll](https://github.com/yushulx/net-barcode-reader/releases/download/v1.0/DynamsoftBarcodeReader.dll) directly from GitHub.
+4. Press F5 to run the application or execute the command `dotnet run` in command-line tool:
 
-Copy `DynamsoftBarcodeReaderx64.dll` to `NetCoreBarcode` folder and rename it to `DynamsoftBarcodeReader.dll`.
-
-Press F5 to run the app in **Visual Studio Code** or execute the command `dotnet run` via **cmd.exe**:
-
-![.net core barcode reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-core-barcode-reader.png)
+    ![.net core barcode reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-core-barcode-reader.png)
 
 
 ## Blog
