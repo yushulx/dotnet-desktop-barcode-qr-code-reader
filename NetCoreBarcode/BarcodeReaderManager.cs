@@ -15,8 +15,9 @@ namespace NetFrameworkBarcode
 
         public BarcodeReaderManager()
         {
+            string errorMsg = "";
+            DBR_InitLicense("LICENSE-KEY", out errorMsg, 512);
             hBarcode = DBR_CreateInstance();
-            DBR_InitLicense(hBarcode, "LICENSE-KEY");
         }
 
         public void Destroy()
@@ -190,7 +191,7 @@ namespace NetFrameworkBarcode
         public static extern void DBR_DestroyInstance(IntPtr hBarcode);
 
         [DllImport("DynamsoftBarcodeReader")]
-        public static extern int DBR_InitLicense(IntPtr hBarcode, string license);
+        public static extern int DBR_InitLicense(string license, out string errorMsg, int errorMsgSize);
 
         [DllImport("DynamsoftBarcodeReader")]
         public static extern int DBR_DecodeFile(IntPtr hBarcode, string filename, string template);

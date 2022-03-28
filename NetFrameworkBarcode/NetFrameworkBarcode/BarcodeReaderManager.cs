@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dynamsoft.Barcode;
+using Dynamsoft;
+using Dynamsoft.DBR;
 using System.Drawing;
 
 namespace NetFrameworkBarcode
@@ -14,7 +15,9 @@ namespace NetFrameworkBarcode
 
         public BarcodeReaderManager()
         {
-            mBarcodeReader = new BarcodeReader("LICENSE-KEY");
+            string errorMsg;
+            BarcodeReader.InitLicense("<insert DBR license key here>", out errorMsg);
+            mBarcodeReader = new BarcodeReader();
         }
 
         public string[] ReadBarcode(Bitmap bitmap)
