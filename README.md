@@ -1,5 +1,5 @@
 # Desktop .NET Barcode and QR Code Reader
-The samples demonstrate how to use [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/sdk-desktop-server/) to create Desktop barcode and QR code reader applications based on **.NET Framework** and **.NET Core**.
+The samples demonstrate how to use [Dynamsoft Barcode Reader](https://www.dynamsoft.com/barcode-reader/sdk-desktop-server/) to create Desktop barcode and QR code reader applications based on **.NET Framework** and **.NET 6**.
 
 ## SDK Version
 [v9.0](https://www.dynamsoft.com/barcode-reader/downloads//#desktop)
@@ -22,9 +22,9 @@ Click [here](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr
 
     ![.net framework barcode and QR code reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-framework-barcode-reader.png)
 
-## .NET Core
+## .NET 6
 1. Import the project into **Visual Studio** or **Visual Studio Code**.
-2. Download C++ SDK, and copy DLL files to the root of the project. For Windows, rename `DynamsoftBarcodeReaderx64.dll` to `DynamsoftBarcodeReader.dll`.
+2. Download C++ SDK, and copy DLL files to the root of the project. Rename `DynamsoftBarcodeReaderx64.dll` to `DynamsoftBarcodeReader.dll`.
 3. Set the license in `BarcodeReaderManager.cs`:
 
     ```C#
