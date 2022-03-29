@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Text;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
@@ -23,7 +18,7 @@ namespace NetFrameworkBarcode
 
         public void Destroy()
         {
-            if (hBarcode != null)
+            if (hBarcode != IntPtr.Zero)
             {
                 DBR_DestroyInstance(hBarcode);
             }
@@ -182,24 +177,24 @@ namespace NetFrameworkBarcode
         }
 
         [DllImport("DynamsoftBarcodeReader")]
-        public static extern IntPtr DBR_CreateInstance();
+        static extern IntPtr DBR_CreateInstance();
 
         [DllImport("DynamsoftBarcodeReader")]
-        public static extern void DBR_DestroyInstance(IntPtr hBarcode);
+        static extern void DBR_DestroyInstance(IntPtr hBarcode);
 
         [DllImport(@"DynamsoftBarcodeReader.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int DBR_InitLicense(string license, [Out] byte[] errorMsg, int errorMsgSize);
+        static extern int DBR_InitLicense(string license, [Out] byte[] errorMsg, int errorMsgSize);
 
         [DllImport("DynamsoftBarcodeReader")]
-        public static extern int DBR_DecodeFile(IntPtr hBarcode, string filename, string template);
+        static extern int DBR_DecodeFile(IntPtr hBarcode, string filename, string template);
 
         [DllImport("DynamsoftBarcodeReader")]
-        public static extern int DBR_FreeTextResults(ref IntPtr pTextResultArray);
+        static extern int DBR_FreeTextResults(ref IntPtr pTextResultArray);
 
         [DllImport("DynamsoftBarcodeReader")]
-        public static extern void DBR_GetAllTextResults(IntPtr hBarcode, ref IntPtr pTextResultArray);
+        static extern void DBR_GetAllTextResults(IntPtr hBarcode, ref IntPtr pTextResultArray);
         [DllImport("DynamsoftBarcodeReader")]
-        public static extern int DBR_DecodeBuffer(IntPtr hBarcode, IntPtr pBufferBytes, int width, int height, int stride, ImagePixelFormat format, string template);
+        static extern int DBR_DecodeBuffer(IntPtr hBarcode, IntPtr pBufferBytes, int width, int height, int stride, ImagePixelFormat format, string template);
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         internal struct PTextResult
@@ -226,20 +221,8 @@ namespace NetFrameworkBarcode
             public IntPtr results;
         }
 
-        public string[] ReadBarcode(Bitmap bitmap)
+        public string[]? ReadBarcode(Bitmap bitmap)
         {
-            // TextResult[] textResults = mBarcodeReader.DecodeBitmap(bitmap, "");
-            // if (textResults != null)
-            // {
-            //     string[] results = new string[textResults.Length];
-            //     int index = 0;
-            //     foreach (TextResult result in textResults)
-            //     {
-            //         results[index++] = result.BarcodeText;
-            //     }
-            //     return results;
-            // }
-
             //Create a BitmapData and Lock all pixels to be written 
             BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
             ImageLockMode.ReadWrite, bitmap.PixelFormat);
@@ -276,16 +259,23 @@ namespace NetFrameworkBarcode
 
             if (pTextResultArray != IntPtr.Zero)
             {
-                TextResultArray results = (TextResultArray)Marshal.PtrToStructure(pTextResultArray, typeof(TextResultArray));
-                int count = results.resultsCount;
-                IntPtr[] barcodes = new IntPtr[count];
-                Marshal.Copy(results.results, barcodes, 0, count);
-                string[] resultArray = new string[count];
-
-                for (int i = 0; i < count; i++)
+                string[]? resultArray = null;
+                TextResultArray? results = (TextResultArray?)Marshal.PtrToStructure(pTextResultArray, typeof(TextResultArray));
+                if (results != null)
                 {
-                    PTextResult result = (PTextResult)Marshal.PtrToStructure(barcodes[i], typeof(PTextResult));
-                    resultArray[i] = result.barcodeText;
+                    int count = results.Value.resultsCount;
+                    IntPtr[] barcodes = new IntPtr[count];
+                    Marshal.Copy(results.Value.results, barcodes, 0, count);
+                    resultArray = new string[count];
+                    
+                    for (int i = 0; i < count; i++)
+                    {
+                        PTextResult? result = (PTextResult?)Marshal.PtrToStructure(barcodes[i], typeof(PTextResult));
+                        if (result != null)
+                        {
+                            resultArray[i] = result.Value.barcodeText;
+                        }
+                    }
                 }
 
                 // Release memory of barcode results

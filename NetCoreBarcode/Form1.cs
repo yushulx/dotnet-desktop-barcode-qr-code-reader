@@ -37,7 +37,7 @@ namespace NetFrameworkBarcode
 
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    Bitmap bitmap = null;
+                    Bitmap? bitmap = null;
                     
                     try
                     {
@@ -54,7 +54,7 @@ namespace NetFrameworkBarcode
 
                     this.Invoke((MethodInvoker)delegate
                     {
-                        string[] results = mBarcodeReaderManager.ReadBarcode(bitmap);
+                        string[]? results = mBarcodeReaderManager.ReadBarcode(bitmap);
                         if (results != null)
                         {
                             foreach (string result in results)
