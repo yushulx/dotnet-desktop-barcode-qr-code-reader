@@ -1,31 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing.Imaging;
+using Dynamsoft;
 
-namespace NetFrameworkBarcode
+namespace Test
 {
     public partial class Form1 : Form
     {
-        private BarcodeReaderManager mBarcodeReaderManager;
+        private BarcodeQRCodeReader reader;
 
         public Form1()
         {
             InitializeComponent();
-
-            mBarcodeReaderManager = new BarcodeReaderManager();
+            BarcodeQRCodeReader.InitLicense("LICENSE-KEY"); // Get a license key from https://www.dynamsoft.com/customer/license/trialLicense?product=dbr
+            reader = BarcodeQRCodeReader.Create();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
                 base.OnFormClosing(e);
                 // Code
-                mBarcodeReaderManager.Destroy();
+                reader.Destroy();
         } 
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,7 +47,35 @@ namespace NetFrameworkBarcode
 
                     this.Invoke((MethodInvoker)delegate
                     {
-                        string[]? results = mBarcodeReaderManager.ReadBarcode(bitmap);
+                        //Create a BitmapData and Lock all pixels to be written 
+                        BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                        ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
+                        BarcodeQRCodeReader.ImagePixelFormat format = BarcodeQRCodeReader.ImagePixelFormat.IPF_ARGB_8888;
+
+                        switch (bitmap.PixelFormat)
+                        {
+                            case PixelFormat.Format24bppRgb:
+                                format = BarcodeQRCodeReader.ImagePixelFormat.IPF_RGB_888;
+                                break;
+                            case PixelFormat.Format32bppArgb:
+                                format = BarcodeQRCodeReader.ImagePixelFormat.IPF_ARGB_8888;
+                                break;
+                            case PixelFormat.Format16bppRgb565:
+                                format = BarcodeQRCodeReader.ImagePixelFormat.IPF_RGB_565;
+                                break;
+                            case PixelFormat.Format16bppRgb555:
+                                format = BarcodeQRCodeReader.ImagePixelFormat.IPF_RGB_555;
+                                break;
+                            case PixelFormat.Format8bppIndexed:
+                                format = BarcodeQRCodeReader.ImagePixelFormat.IPF_GRAYSCALED;
+                                break;
+                        }
+
+                        string[]? results = reader.DecodeBuffer(bmpData.Scan0, bitmap.Width, bitmap.Height, bmpData.Stride, format);
+                        //Unlock the pixels
+                        bitmap.UnlockBits(bmpData);
+
                         if (results != null)
                         {
                             foreach (string result in results)
