@@ -34,7 +34,7 @@ Click [here](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr
 
 4. Press F5 to run the application or execute the command `dotnet run` in command-line tool:
 
-    ![.net core barcode reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-core-barcode-reader.png)
+    ![.net core barcode reader](https://www.dynamsoft.com/codepool/img/2022/03/desktop-dotnet-barcode-qr-code-reader.png)
 
 
 ## Blog
