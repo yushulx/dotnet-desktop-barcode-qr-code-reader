@@ -38,4 +38,4 @@ Click [here](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr
 
 
 ## Blog
-[GUI Barcode Reader: Porting .NET Framework to .NET Core](https://www.codepool.biz/net-core-gui-barcode-reader.html)
+[Windows Barcode and QR Code Reader: Porting .NET Framework to .NET 6](https://www.dynamsoft.com/codepool/dotnet-desktop-gui-barcode-qrcode-reader.html)
