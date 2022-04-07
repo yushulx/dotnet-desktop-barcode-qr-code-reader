@@ -23,16 +23,18 @@ Click [here](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr
     ![.net framework barcode and QR code reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-framework-barcode-reader.png)
 
 ## .NET 6
-1. Import the project into **Visual Studio** or **Visual Studio Code**.
-2. Download C++ SDK, and copy DLL files to the root of the project. Rename `DynamsoftBarcodeReaderx64.dll` to `DynamsoftBarcodeReader.dll`.
-3. Set the license in `BarcodeReaderManager.cs`:
+1. Set the license in `Form1.cs`:
 
     ```C#
-    string errorMsg = "";
-    DBR_InitLicense("LICENSE-KEY", out errorMsg, 512);
+    BarcodeQRCodeReader.InitLicense("LICENSE-KEY");
     ```
 
-4. Press F5 to run the application or execute the command `dotnet run` in command-line tool:
+2. Build and run the project:
+    
+    ```bash
+    dotnet restore
+    dotnet run
+    ```
 
     ![.net core barcode reader](https://www.dynamsoft.com/codepool/img/2022/03/desktop-dotnet-barcode-qr-code-reader.png)
 
