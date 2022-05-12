@@ -20,7 +20,7 @@ Click [here](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr
     ```
 4. Run the application:
 
-    ![.net framework barcode and QR code reader](http://www.codepool.biz/wp-content/uploads/2019/11/net-framework-barcode-reader.png)
+    ![.net framework barcode and QR code reader](http://www.dynamsoft.com/codepool/img/2019/11/net-framework-barcode-reader.png)
 
 ## .NET 6
 1. Set the license in `Form1.cs`:
